@@ -20,9 +20,9 @@ if (isset($_SESSION['admin'])) {
 
     <body>
 
-					 <a href="http://zend-ormaba/menu.php"> Inici </a>
+					 <a href="http://zend-ormaba/ldap/menu.php"> Inici </a>
                    
-                     <a href="http://zend-ormaba/logout.php">Tancar Sessió </a>
+                     <a href="http://zend-ormaba/ldap/logout.php">Tancar Sessió </a>
                  
             <?php
             if (
@@ -79,7 +79,7 @@ if (isset($_SESSION['admin'])) {
                 }
             } else {
             ?>
-                        <form action="http://zend-ormaba/formCrear.php" method="POST" autocomplete="off">
+                        <form action="http://zend-ormaba/ldap/formCrear.php" method="POST" autocomplete="off">
                             <h5>Crear Usuari</h5>
                             <input type="text" name="uid" placeholder="UID" required />
                             <input type="text" name="ou" placeholder="Unitat Organitzativa" required />
@@ -101,12 +101,11 @@ if (isset($_SESSION['admin'])) {
             <?php
             }
             ?>
-        </div>
     </body>
 
     </html>
 <?php
 } else {
-    header("Location: http://zend-ormaba/login.php");
+    header("Location: http://zend-ormaba/ldap/login.php");
 }
 ?>

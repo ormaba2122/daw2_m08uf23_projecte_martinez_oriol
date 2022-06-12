@@ -30,6 +30,6 @@
 		</title>
 	</head>
 	<body>
-		<a href="http://zend-ormaba/index.php">Torna a la pàgina inicial</a>
+		<a href="http://zend-ormaba/ldap/index.php">Torna a la pàgina inicial</a>
 	</body>
 </html>
