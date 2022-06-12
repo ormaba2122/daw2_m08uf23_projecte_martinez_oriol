@@ -18,9 +18,9 @@ session_start();
 
     <body>
 
-					 <a href="http://zend-ormaba/ldap/menu.php"> Inici </a>
+					 <a href="http://zend-ormaba/ldap/menu.php"> Inici </a></br>
                    
-                     <a href="http://zend-ormaba/ldap/logout.php">Tancar Sessió </a>
+                     <a href="http://zend-ormaba/ldap/logout.php">Tancar Sessió </br></a>
                  
             <?php
             if (
