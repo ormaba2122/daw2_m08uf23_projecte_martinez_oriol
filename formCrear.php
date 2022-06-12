@@ -18,9 +18,9 @@ session_start();
 
     <body>
 
-					 <a href="http://zend-ormaba/ldap/menu.php"> Inici </a></br>
+					 <a href="http://zend-ormaba/ldap/menu.php"> Tornar a inici </a></br>
                    
-                     <a href="http://zend-ormaba/ldap/logout.php">Tancar Sessió </br></a>
+                     <a href="http://zend-ormaba/ldap/logout.php">Tancar Sessió </a></br>
                  
             <?php
             if (
@@ -71,10 +71,13 @@ session_start();
                 Attribute::setAttribute($nova_entrada, 'title', $titol);
                 Attribute::setAttribute($nova_entrada, 'description', $descripcio);
                 $dn = 'uid=' . $uid . ',ou=' . $ou . ',dc=fjeclot,dc=net';
+                try{
                 if ($ldap->add($dn, $nova_entrada)) {
-                    echo "Usuari creat <br />";
-                    echo '<a href="http://zend-ormaba/ldap/menu.php">Tornar a Inici</a>';
-                }
+                    echo "</br>Usuari creat <br />";
+                }}
+                catch (Exception $e) {
+                        echo "<b>Error, Aquesta entrada no existeix</b><br>";
+                    }
             } else {
             ?>
                         <form action="http://zend-ormaba/ldap/formCrear.php" method="POST" autocomplete="off">
