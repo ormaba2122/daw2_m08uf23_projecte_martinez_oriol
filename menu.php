@@ -1,8 +1,7 @@
 <html>
 	<head>
 		<title>
-			PÀGINA WEB DEL MENÚ PRINCIPAL DE L'APLICACIÓ D'ACCÉS A BASES DE DADES LDAP
-		</title>
+hola		</title>
 	</head>
 	<body>
 		<h2> Projecte Zend Server amb Ldap</h2>

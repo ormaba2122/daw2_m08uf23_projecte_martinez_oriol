@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.13.0 - 2022-03-19
+
+
+-----
+
+### Release Notes for [2.13.0](https://github.com/laminas/laminas-ldap/milestone/7)
+
+Feature release (minor)
+
+### 2.13.0
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **3**
+- Total contributors: **2**
+
+#### Bug
+
+ - [30: Remove obsoleted file, fixing `php$VERSION-ldap` package installation](https://github.com/laminas/laminas-ldap/pull/30) thanks to @heiglandreas
+ - [29: Create separate testsuite for connectivity-tests](https://github.com/laminas/laminas-ldap/pull/29) thanks to @heiglandreas
+ - [27: Fix some php 8.1 compatibility issues](https://github.com/laminas/laminas-ldap/pull/27) thanks to @tbl0605
+
+## 2.12.0 - 2021-12-03
+
+
+-----
+
+### Release Notes for [2.12.0](https://github.com/laminas/laminas-ldap/milestone/4)
+
+Feature release (minor)
+
+### 2.12.0
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **3**
+- Total contributors: **3**
+
+#### Enhancement
+
+ - [23: Added support for PHP 8.1](https://github.com/laminas/laminas-ldap/pull/23) thanks to @Koen1999 and @froschdesign
+ - [18: Psalm integration](https://github.com/laminas/laminas-ldap/pull/18) thanks to @ghostwriter
+ - [16: Remove file headers](https://github.com/laminas/laminas-ldap/pull/16) thanks to @ghostwriter
+
 ## 2.11.0 - 2021-01-12
 
 

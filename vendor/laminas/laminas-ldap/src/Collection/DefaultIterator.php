@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
- * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\Ldap\Collection;
 
 use Countable;
@@ -13,6 +7,7 @@ use Iterator;
 use Laminas\Ldap;
 use Laminas\Ldap\ErrorHandler;
 use Laminas\Ldap\Exception;
+use Laminas\Ldap\Handler;
 
 /**
  * Laminas\Ldap\Collection\DefaultIterator is the default collection iterator implementation
@@ -84,7 +79,7 @@ class DefaultIterator implements Iterator, Countable
      * Constructor.
      *
      * @param  \Laminas\Ldap\Ldap $ldap
-     * @param  resource        $resultId
+     * @param  resource $resultId
      * @throws \Laminas\Ldap\Exception\LdapException if no entries was found.
      * @return DefaultIterator
      */
@@ -133,7 +128,7 @@ class DefaultIterator implements Iterator, Countable
     public function close()
     {
         $isClosed = false;
-        if (is_resource($this->resultId)) {
+        if (Handler::isResultHandle($this->resultId)) {
             ErrorHandler::start();
             $isClosed       = ldap_free_result($this->resultId);
             ErrorHandler::stop();
@@ -212,6 +207,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return $this->itemCount;
@@ -224,12 +220,13 @@ class DefaultIterator implements Iterator, Countable
      * @return array|null
      * @throws \Laminas\Ldap\Exception\LdapException
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
-        if (! is_resource($this->current)) {
+        if (! Handler::isResultEntryHandle($this->current)) {
             $this->rewind();
         }
-        if (! is_resource($this->current)) {
+        if (! Handler::isResultEntryHandle($this->current)) {
             return;
         }
 
@@ -284,12 +281,13 @@ class DefaultIterator implements Iterator, Countable
      * @throws \Laminas\Ldap\Exception\LdapException
      * @return string|null
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
-        if (! is_resource($this->current)) {
+        if (! Handler::isResultEntryHandle($this->current)) {
             $this->rewind();
         }
-        if (is_resource($this->current)) {
+        if (Handler::isResultEntryHandle($this->current)) {
             $resource = $this->ldap->getResource();
             ErrorHandler::start();
             $currentDn = ldap_get_dn($resource, $this->current);
@@ -312,6 +310,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         next($this->entries);
@@ -326,6 +325,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->entries);
@@ -340,9 +340,10 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
-        return (is_resource($this->current));
+        return Handler::isResultEntryHandle($this->current);
     }
 
     /**

@@ -5,8 +5,6 @@ use Laminas\Ldap\Attribute;
 use Laminas\Ldap\Ldap;
 
 session_start();
-if (isset($_SESSION['admin'])) {
-    ini_set('display_errors', 0);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -75,7 +73,7 @@ if (isset($_SESSION['admin'])) {
                 $dn = 'uid=' . $uid . ',ou=' . $ou . ',dc=fjeclot,dc=net';
                 if ($ldap->add($dn, $nova_entrada)) {
                     echo "Usuari creat <br />";
-                    echo '<a href="http://zend-ormaba/menu.php">Tornar a Inici</a>';
+                    echo '<a href="http://zend-ormaba/ldap/menu.php">Tornar a Inici</a>';
                 }
             } else {
             ?>
@@ -105,7 +103,5 @@ if (isset($_SESSION['admin'])) {
 
     </html>
 <?php
-} else {
-    header("Location: http://zend-ormaba/ldap/login.php");
-}
+
 ?>

@@ -1,14 +1,9 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
- * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\Ldap;
 
 use Iterator;
+use ReturnTypeWillChange;
 use Laminas\EventManager\EventManager;
 use RecursiveIterator;
 
@@ -1001,6 +996,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * @return bool
      * @throws Exception\LdapException
      */
+    #[ReturnTypeWillChange]
     public function hasChildren()
     {
         if (! is_array($this->children)) {
@@ -1020,6 +1016,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * @return Node\ChildrenIterator
      * @throws Exception\LdapException
      */
+    #[ReturnTypeWillChange]
     public function getChildren()
     {
         if (! is_array($this->children)) {
@@ -1059,6 +1056,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         return $this;
@@ -1070,6 +1068,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * @return string
      */
+    #[ReturnTypeWillChange]
     public function key()
     {
         return $this->getRdnString();
@@ -1079,6 +1078,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * Move forward to next attribute.
      * Implements Iterator
      */
+    #[ReturnTypeWillChange]
     public function next()
     {
         $this->iteratorRewind = false;
@@ -1088,6 +1088,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * Rewind the Iterator to the first attribute.
      * Implements Iterator
      */
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         $this->iteratorRewind = true;
@@ -1100,6 +1101,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function valid()
     {
         return $this->iteratorRewind;

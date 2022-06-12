@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
- * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\Ldap;
 
 /**
@@ -210,7 +204,7 @@ class Filter extends Filter\StringFilter
         if ($prepend !== null) {
             $str .= $prepend;
         }
-        $str .= ldap_escape($value, null, LDAP_ESCAPE_FILTER);
+        $str .= ldap_escape($value, '', LDAP_ESCAPE_FILTER);
         if ($append !== null) {
             $str .= $append;
         }

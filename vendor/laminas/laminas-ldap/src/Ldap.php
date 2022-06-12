@@ -1,13 +1,8 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
- * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\Ldap;
 
+use Laminas\Ldap\Handler;
 use Laminas\Ldap\Exception\LdapException;
 use Traversable;
 
@@ -118,7 +113,7 @@ class Ldap
      */
     public function getResource()
     {
-        if (! is_resource($this->resource) || $this->boundUser === false) {
+        if (! Handler::isLdapHandle($this->resource) || $this->boundUser === false) {
             $this->bind();
         }
 
@@ -134,7 +129,7 @@ class Ldap
     {
         ErrorHandler::start(E_WARNING);
         $ret = false;
-        if (is_resource($this->resource)) {
+        if (Handler::isLdapHandle($this->resource)) {
             $ret = ldap_get_option($this->resource, LDAP_OPT_ERROR_NUMBER, $err);
         }
         ErrorHandler::stop();
@@ -169,7 +164,7 @@ class Ldap
          */
         ErrorHandler::start(E_WARNING);
         $estr1 = "getLastError: could not call ldap_error because LDAP resource was not of type resource";
-        if (is_resource($this->resource)) {
+        if (Handler::isLdapHandle($this->resource)) {
             $estr1 = ldap_error($this->resource);
         }
         ErrorHandler::stop();
@@ -184,7 +179,7 @@ class Ldap
 
         ErrorHandler::start(E_WARNING);
         $estr2 = "getLastError: could not call ldap_get_option because LDAP resource was not of type resource";
-        if (is_resource($this->resource)) {
+        if (Handler::isLdapHandle($this->resource)) {
             ldap_get_option($this->resource, LDAP_OPT_ERROR_STRING, $estr2);
         }
         ErrorHandler::stop();
@@ -302,7 +297,7 @@ class Ldap
                         $permittedOptions[$key] = $val;
                         break;
                     default:
-                        $permittedOptions[$key] = trim($val);
+                        $permittedOptions[$key] = trim((string) $val);
                         break;
                 }
             }
@@ -671,7 +666,7 @@ class Ldap
             throw new Exception\LdapException(null, 'Invalid account filter');
         }
 
-        if (! is_resource($this->getResource())) {
+        if (! Handler::isLdapHandle($this->getResource())) {
             $this->bind();
         }
 
@@ -742,7 +737,7 @@ class Ldap
 
     protected function unbind()
     {
-        if (is_resource($this->resource) && is_string($this->boundUser)) {
+        if (Handler::isLdapHandle($this->resource) && is_string($this->boundUser)) {
             ErrorHandler::start(E_WARNING);
             ldap_unbind($this->resource);
             ErrorHandler::stop();
@@ -842,7 +837,7 @@ class Ldap
         $resource = ldap_connect($this->connectString);
         ErrorHandler::stop();
 
-        if (is_resource($resource) === true) {
+        if (Handler::isLdapHandle($resource)) {
             $this->resource  = $resource;
             $this->boundUser = false;
 
@@ -945,7 +940,7 @@ class Ldap
             }
         }
 
-        if (! is_resource($this->resource)) {
+        if (! Handler::isLdapHandle($this->resource)) {
             $this->connect();
         }
 
